@@ -5,7 +5,7 @@ import About from '../Pages/About/About';
 import Appointment from '../Pages/Appointment/Appointment';
 import Blog from '../Pages/Blog/Blog';
 import Contact from '../Pages/Contact/Contact';
-import Services from '../Pages/Contact/Contact';
+import Services from '../Pages/Services/Services'
 import ErrorPage from '../Pages/ErrorPage/ErrorPage';
 import Home from '../Pages/Home/Home';
 

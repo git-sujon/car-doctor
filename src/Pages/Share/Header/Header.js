@@ -5,7 +5,7 @@ import logo from '../../../Asset/logo.svg'
 const Header = () => {
   return (
     <div>
-      <div className="navbar bg-base-100">
+      <div className="navbar bg-base-100 font-semibold my-14">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -36,7 +36,7 @@ const Header = () => {
               </li>
             </ul>
           </div>
-          <Link to='/' className="btn btn-ghost normal-case text-xl"><img className="w-16" src={logo} alt="" /></Link>
+          <Link to='/' className="btn w-28 btn-ghost normal-case text-xl"><img className="w-16" src={logo} alt="" /></Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal p-0">
@@ -63,8 +63,9 @@ const Header = () => {
         </div>
 
         <div className="navbar-end">
-          <Link to="/appointment" className="btn">
-            Appointment
+          <Link to="/appointment" >
+          <button className="btn btn-outline btn-warning">Appointment</button>
+            
           </Link>
         </div>
       </div>
