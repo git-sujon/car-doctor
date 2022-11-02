@@ -63,7 +63,7 @@ const Header = () => {
         </div>
 
         <div className="navbar-end">
-          <Link to="/appointment" >
+          <Link to="/login" >
           <button className="btn btn-outline btn-warning">Appointment</button>
             
           </Link>

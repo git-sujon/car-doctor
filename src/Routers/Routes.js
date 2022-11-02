@@ -8,6 +8,8 @@ import Contact from '../Pages/Contact/Contact';
 import Services from '../Pages/Services/Services'
 import ErrorPage from '../Pages/ErrorPage/ErrorPage';
 import Home from '../Pages/Home/Home';
+import Login from '../Pages/Login/Login';
+import SignUp from '../Pages/SIgnUp/SignUp';
 
 
 const router= createBrowserRouter([
@@ -39,6 +41,14 @@ const router= createBrowserRouter([
            {
             path:'/appointment',
             element:<Appointment></Appointment>
+           },
+           {
+            path:'/login',
+            element:<Login></Login>
+           },
+           {
+            path:'/register',
+            element:<SignUp></SignUp>
            },
         ]
     }
