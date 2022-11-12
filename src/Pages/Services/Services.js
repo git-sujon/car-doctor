@@ -19,7 +19,7 @@ const Services = () => {
     fetch(`http://localhost:5000/services?search=${search}&order=${ sort ? 'LowToHigh' : 'HighToLow'}`)
       .then((res) => res.json())
       .then((data) => setServices(data));
-  }, [sort]);
+  }, [sort, search]);
 
   return (
     <div className="text-center   py-14">
