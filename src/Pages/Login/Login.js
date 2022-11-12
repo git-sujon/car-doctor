@@ -1,39 +1,62 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import image from "../../Asset/images/login/login.svg";
 import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
-
+import SocialLogin from "../Others/SocialLogin";
 
 const Login = () => {
-  const {userLogIN} =useContext(AuthContext)
-  const [error, setError] = useState('')
+  const { userLogIN, setLoading } = useContext(AuthContext);
+  const [error, setError] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
 
-    const formSubmitHandler = (event) =>{
-        event.preventDefault()
-      const form= event.target
-      const email = form.email.value
-      const password = form.password.value
+  const formSubmitHandler = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
 
+    userLogIN(email, password)
+      .then((res) => {
+        const user = res.user;
+        const curentUser = {
+          email: user.email,
+        };
+        
 
-      
-        userLogIN(email, password)
-        .then(res => {
-          console.log(res)
+        // JWT Token Implement
 
+        fetch(`http://localhost:5000/jwt`, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(curentUser),
         })
-        .catch(err=> {
-          console.error(err);
-          setError(err.message)
-          
-        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            // Local Storage is not the best placee to  store
+            localStorage.setItem("CarDoctorToken", data.token);
+
+            navigate(from, { replace: true });
+          })
 
 
 
 
-    }
+          .catch((err) => console.log(err));
+      })
 
-
-
+      .catch((err) => {
+        console.error(err);
+        setError(err.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   return (
     <div>
@@ -62,7 +85,7 @@ const Login = () => {
                   <span className="label-text">Confirm Password</span>
                 </label>
                 <input
-                  type="text"
+                  type="password"
                   name="password"
                   placeholder="password"
                   className="input input-bordered"
@@ -74,23 +97,28 @@ const Login = () => {
                 </label>
 
                 <label className="label">
-         
-                <p className="text-red-500">{error}</p>
+                  <p className="text-red-500">{error}</p>
                 </label>
-
               </div>
 
               <div className="form-control mt-6">
-                <input type="submit" value='Login' className="btn btn-warning"/>
+                <input
+                  type="submit"
+                  value="Login"
+                  className="btn btn-warning"
+                />
               </div>
             </form>
-            <div className="text-center py-8">
-                <p>Or Sign in with</p>
-                <div>
-                    <Link><img src="" alt="" /></Link>
-                </div>
-                <p className="text-gray-500">Don't an account? <Link to='/register' className="font-bold text-orange-400">Sign Up</Link></p>
-
+            <div className="text-center py-2">
+      
+                <SocialLogin></SocialLogin>
+        
+              <p className="text-gray-500">
+                Don't an account?{" "}
+                <Link to="/register" className="font-bold text-orange-400">
+                  Sign Up
+                </Link>
+              </p>
             </div>
           </div>
         </div>

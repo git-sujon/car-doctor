@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const ServiceItems = ({ serviecs }) => {
   const { _id, service_id, title, img, price } = serviecs;
@@ -14,6 +15,8 @@ const ServiceItems = ({ serviecs }) => {
         <div className="card-actions justify-between items-center">
         <p className="text-left text-orange-600 text-xl font-semibold">Price: ${price}</p>
           <button className="text-orange-600">
+           
+            <Link  to={`/checkout/${_id}`}  >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -27,7 +30,7 @@ const ServiceItems = ({ serviecs }) => {
                 stroke-linejoin="round"
                 d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
               />
-            </svg>
+            </svg></Link>
           </button>
         </div>
       </div>
